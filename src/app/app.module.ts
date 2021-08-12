@@ -11,6 +11,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { BarChartComponent } from './home-page/compare-page/bar-chart/bar-chart.component';
 import { PieChartComponent } from './home-page/statistic-page/pie-chart/pie-chart.component';
 import { TableComponent } from './home-page/statistic-page/table/table.component';
+import { EditDialogComponent } from './home-page/dialogs/edit-dialog/edit-dialog.component';
+import { SelectPeriodDialogComponent } from './home-page/dialogs/select-period-dialog/select-period-dialog.component';
+import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-periods-dialog/compare-periods-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { TableComponent } from './home-page/statistic-page/table/table.component
     HeaderComponent,
     BarChartComponent,
     PieChartComponent,
-    TableComponent
+    TableComponent,
+    EditDialogComponent,
+    SelectPeriodDialogComponent,
+    ComparePeriodsDialogComponent
   ],
   imports: [
     BrowserModule,
