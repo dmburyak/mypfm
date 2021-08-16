@@ -14,6 +14,7 @@ import { TableComponent } from './home-page/statistic-page/table/table.component
 import { EditDialogComponent } from './home-page/dialogs/edit-dialog/edit-dialog.component';
 import { SelectPeriodDialogComponent } from './home-page/dialogs/select-period-dialog/select-period-dialog.component';
 import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-periods-dialog/compare-periods-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-perio
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
