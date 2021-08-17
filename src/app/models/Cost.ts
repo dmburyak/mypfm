@@ -1,7 +1,11 @@
 export interface Cost {
   id?: number;
   date: Date;
-  amount: number;
-  comment?: string;
-  category: string;
+  flat: number;
+  food: number;
+  dress: number;
+  medicine: number;
+  toys: number;
+  other: number;
+  comment: string;
 }

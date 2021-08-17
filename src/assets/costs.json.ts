@@ -2,15 +2,23 @@
     {
         "id": 1,
         "date": "2021-08-10T09:33:46.958Z",
-        "amount": 25,
-        "comment": "Test comment",
-        "category": "Test1"
+        "flat": 100,
+        "food": 200,
+        "dress": 50,
+        "medicine": null,
+        "toys": null,
+        "other": null,
+        "comment": "Test comment"
     },
     {
         "id": 2,
         "date": "2021-08-10T14:16:47.123Z",
-        "amount": 30,
-        "comment": "Test 2 comment",
-        "category": "Test2"
+        "flat": null,
+        "food": 150,
+        "dress": null,
+        "medicine": 300,
+        "toys": null,
+        "other": 80,
+        "comment": "Test 2 comment"
     }
 ]
