@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Cost } from '../../../models/Cost';
-import { CostsService } from '../../../services/costs.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartType, ChartOptions } from 'chart.js';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss']
 })
-export class PieChartComponent implements OnInit {
 
-  costs: Cost[] = [];
+export class PieChartComponent {
 
-  constructor(private costsService: CostsService) {
-  }
+  @Input() pieChartData!: SingleDataSet;
+  @Input() pieChartType!: ChartType;
+  @Input() pieChartLegend!: boolean;
+  @Input() pieChartPlugins = [];
+  @Input() pieChartOptions!: ChartOptions;
+  @Input() pieChartLabels!: Label[];
 
-  ngOnInit(): void {
-    this.costsService.cost$
-      .subscribe(result => this.costs = result);
+  constructor() {
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
   }
 
 }

@@ -1,5 +1,12 @@
 <div class="wrapper">
   <h2>Статистика за август 2021 г.</h2>
-<app-table></app-table>
-<app-pie-chart></app-pie-chart>
+<app-table [costsMap]="costsMap" [costs]="costs"></app-table>
+<app-pie-chart
+  [pieChartData]="pieChartData"
+  [pieChartType]="pieChartType"
+  [pieChartLegend]="pieChartLegend"
+  [pieChartPlugins]="pieChartPlugins"
+  [pieChartOptions]="pieChartOptions"
+  [pieChartLabels]="pieChartLabels"
+></app-pie-chart>
 </div>
