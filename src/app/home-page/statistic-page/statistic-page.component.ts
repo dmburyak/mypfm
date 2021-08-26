@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CostsService } from '../../services/costs.service';
+import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { Cost } from '../../models/Cost';
-import { ChartOptions, ChartType } from 'chart.js';
+import { CostsService } from '../../services/costs.service';
 
 @Component({
   selector: 'app-statistic-page',
@@ -10,6 +10,24 @@ import { ChartOptions, ChartType } from 'chart.js';
   styleUrls: ['./statistic-page.component.scss']
 })
 export class StatisticPageComponent implements OnInit {
+
+  months = [
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь',
+  ]
+
+  month = '';
+  year = 0;
 
   // Table
   costsMap: Map<string, number> = new Map();
@@ -58,11 +76,11 @@ export class StatisticPageComponent implements OnInit {
       this.costsMap.set(name, sum);
     });
 
-    this.costsMap.set('total', 0);
+    let totalSum = 0;
     this.costsMap.forEach((value) => {
-      // @ts-ignore
-      this.costsMap.set('total', this.costsMap.get('total') + value);
+      totalSum += value;
     })
+    this.costsMap.set('total', totalSum);
 
     this.pieChartData = [
       this.costsMap.get('flat'),
@@ -76,6 +94,10 @@ export class StatisticPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let currentDate = new Date();
+    this.month = this.months[currentDate.getMonth()];
+    this.year = currentDate.getFullYear();
+
     this.costsService.cost$
       .subscribe(result => {
         this.costs = result;

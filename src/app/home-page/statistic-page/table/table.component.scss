@@ -2,6 +2,15 @@ table {
   width: 100%;
 }
 
-tr.mat-footer-row {
+.mat-footer-row {
   font-weight: bold;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  width: 11%;
+}
+
+.mat-column-comment {
+  width: 23%;
 }
