@@ -30,6 +30,10 @@ export class StatisticPageComponent implements OnInit {
   public pieChartPlugins = [];
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    legend: {
+      position: 'left',
+      align: 'start'
+    }
   };
   public pieChartLabels: Label[] = [
     'Квартира',
