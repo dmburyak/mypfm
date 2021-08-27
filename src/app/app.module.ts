@@ -22,6 +22,7 @@ import { EditDialogComponent } from './home-page/dialogs/edit-dialog/edit-dialog
 import { SelectPeriodDialogComponent } from './home-page/dialogs/select-period-dialog/select-period-dialog.component';
 import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-periods-dialog/compare-periods-dialog.component';
 import { StatisticHeaderComponent } from './home-page/statistic-page/statistic-header/statistic-header.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { StatisticHeaderComponent } from './home-page/statistic-page/statistic-h
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    ChartsModule
+    MatDialogModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,11 @@
 
 <app-table [costsMap]="costsMap" [costs]="costs"></app-table>
 
+  <button mat-raised-button color="primary" class="add-button" (click)="openDialog()">
+    <mat-icon class="add-icon">library_add</mat-icon>
+    Добавить расходы
+  </button>
+
 <app-pie-chart
   [pieChartData]="pieChartData"
   [pieChartType]="pieChartType"

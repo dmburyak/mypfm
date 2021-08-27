@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../models/Category';
-import { Cost } from '../models/Cost';
+import { Category } from '../models/category';
 import { CategoriesService } from '../services/categories.service';
 import { CostsService } from '../services/costs.service';
+import { Cost } from '../models/cost';
 
 @Component({
   selector: 'app-home-page',

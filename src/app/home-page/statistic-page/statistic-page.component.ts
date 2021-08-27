@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
-import { Cost } from '../../models/Cost';
+import { Cost } from '../../models/cost';
 import { CostsService } from '../../services/costs.service';
+import { EditDialogComponent } from '../dialogs/edit-dialog/edit-dialog.component';
+import { Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-statistic-page',
@@ -62,7 +65,9 @@ export class StatisticPageComponent implements OnInit {
     'Другое'
   ];
 
-  constructor(private costsService: CostsService) {
+  animal = '';
+
+  constructor(private costsService: CostsService, public dialog: MatDialog) {
   }
 
   getAllCostTotal() {
@@ -105,4 +110,15 @@ export class StatisticPageComponent implements OnInit {
       });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '250px',
+      data: {animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
 }

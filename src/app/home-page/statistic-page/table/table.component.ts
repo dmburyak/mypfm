@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Cost } from '../../../models/Cost';
+import { Cost } from '../../../models/cost';
 
 @Component({
   selector: 'app-table',
