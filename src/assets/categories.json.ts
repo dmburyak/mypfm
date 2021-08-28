@@ -1,10 +1,16 @@
 [
     {
-        "id": 16,
+        "id": 15,
         "name": "flat",
         "nameRu": "Квартира",
         "color": "#ccc"
     },
+  {
+    "id": 16,
+    "name": "kindergarten",
+    "nameRu": "Детский сад",
+    "color": "#f00"
+  },
     {
         "id": 17,
         "name": "food",

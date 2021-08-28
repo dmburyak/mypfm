@@ -34,6 +34,7 @@ export class StatisticPageComponent implements OnInit {
   costs: Cost[] = [];
   costColumns: string[] = [
     'flat',
+    'kindergarten',
     'food',
     'dress',
     'medicine',
@@ -55,6 +56,7 @@ export class StatisticPageComponent implements OnInit {
   };
   public pieChartLabels: Label[] = [
     'Квартира',
+    'Детский сад',
     'Еда',
     'Одежда',
     'Медицина',
@@ -84,6 +86,7 @@ export class StatisticPageComponent implements OnInit {
 
     this.pieChartData = [
       this.costsMap.get('flat'),
+      this.costsMap.get('kindergarten'),
       this.costsMap.get('food'),
       this.costsMap.get('dress'),
       this.costsMap.get('medicine'),

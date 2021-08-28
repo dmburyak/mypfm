@@ -12,6 +12,7 @@ export class EditFormComponent implements OnInit {
 
   costForm = this.fb.group({
     flat: [''],
+    kindergarten: [''],
     food: [''],
     dress: [''],
     medicine: [''],

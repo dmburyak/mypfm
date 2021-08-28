@@ -14,6 +14,7 @@ export class TableComponent {
   displayedColumns: string[] = [
     'date',
     'flat',
+    'kindergarten',
     'food',
     'dress',
     'medicine',
