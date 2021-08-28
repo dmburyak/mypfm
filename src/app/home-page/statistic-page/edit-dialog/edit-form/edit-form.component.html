@@ -1,0 +1,72 @@
+<mat-toolbar color="primary">
+  <span>Редактирование, удаление, добавление затрат</span>
+</mat-toolbar>
+
+<mat-toolbar>
+  <span>Затраты за 03.08.2021</span>
+  <span class="spacer"></span>
+  <button mat-raised-button>Выбрать другую дату</button>
+</mat-toolbar>
+
+<div mat-dialog-content class="edit-form">
+
+    <form [formGroup]="costForm">
+
+      <div class="form-line">
+        <label for="flat">Квартира: </label>
+        <div>
+        <input id="flat" type="text" formControlName="flat"> грн.
+        </div>
+      </div>
+      <div class="form-line">
+        <label for="food">Еда: </label>
+        <div>
+        <input id="food" type="text" formControlName="food"> грн.
+        </div>
+      </div>
+      <div class="form-line">
+        <label for="dress">Одежда: </label>
+        <div>
+        <input id="dress" type="text" formControlName="dress"> грн.
+          </div>
+      </div>
+      <div class="form-line">
+        <label for="medicine">Медицина: </label>
+        <div>
+        <input id="medicine" type="text" formControlName="medicine"> грн.
+          </div>
+      </div>
+      <div class="form-line">
+        <label for="toys">Игрушки, развлечения: </label>
+        <div>
+        <input id="toys" type="text" formControlName="toys"> грн.
+          </div>
+      </div>
+      <div class="form-line">
+        <label for="other">Другое: </label>
+        <div>
+        <input id="other" type="text" formControlName="other"> грн.
+          </div>
+      </div>
+      <div class="form-line">
+        <label for="comment">Комментарий: </label>
+        <div>
+        <textarea id="comment" formControlName="comment"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<div mat-dialog-actions class="action-block">
+    <span class="spacer"></span>
+  <button mat-raised-button (click)="onNoClick()">Отмена</button>
+  <button mat-raised-button [mat-dialog-close]="data.animal" color="primary" cdkFocusInitial>Сохранить</button>
+</div>
+
+<mat-toolbar class="bottom-toolbar">
+<!--  <span class="spacer"></span>-->
+  <button mat-raised-button color="warn">Удалить</button>
+  <span class="delete-text">Удалить затраты за этот день?</span>
+</mat-toolbar>
+
+

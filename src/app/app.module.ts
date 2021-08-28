@@ -18,11 +18,15 @@ import { HeaderComponent } from './shared/header/header.component';
 import { BarChartComponent } from './home-page/compare-page/bar-chart/bar-chart.component';
 import { PieChartComponent } from './home-page/statistic-page/pie-chart/pie-chart.component';
 import { TableComponent } from './home-page/statistic-page/table/table.component';
-import { EditDialogComponent } from './home-page/dialogs/edit-dialog/edit-dialog.component';
+import { EditFormComponent } from './home-page/statistic-page/edit-dialog/edit-form/edit-form.component';
 import { SelectPeriodDialogComponent } from './home-page/dialogs/select-period-dialog/select-period-dialog.component';
 import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-periods-dialog/compare-periods-dialog.component';
 import { StatisticHeaderComponent } from './home-page/statistic-page/statistic-header/statistic-header.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditDialogComponent } from './home-page/statistic-page/edit-dialog/edit-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -35,10 +39,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     BarChartComponent,
     PieChartComponent,
     TableComponent,
-    EditDialogComponent,
+    EditFormComponent,
     SelectPeriodDialogComponent,
     ComparePeriodsDialogComponent,
-    StatisticHeaderComponent
+    StatisticHeaderComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatTableModule,
     MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     ChartsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
