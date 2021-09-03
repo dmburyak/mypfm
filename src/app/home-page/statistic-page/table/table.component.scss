@@ -1,16 +1,28 @@
 table {
   width: 100%;
-}
 
-.mat-footer-row {
-  font-weight: bold;
-}
+  .mat-footer-row {
+    font-weight: bold;
+  }
 
-.mat-header-cell {
-  font-weight: bold;
-  width: 11%;
-}
+  .mat-header-cell {
+    font-weight: bold;
+  }
 
-.mat-column-comment {
-  width: 23%;
+  .mat-cell {
+    width: 10%;
+  }
+
+  .mat-column-comment {
+    width: 20%;
+  }
+
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    text-align: center;
+  }
+
+  td.mat-column-comment {
+    text-align: left;
+  }
+
 }

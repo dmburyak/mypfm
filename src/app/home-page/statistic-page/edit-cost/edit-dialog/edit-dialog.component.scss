@@ -3,6 +3,7 @@
     margin-left: 50px;
     font-size: 16px;
   }
+
   .form-line {
     padding: 10px 0;
     display: flex;
@@ -11,9 +12,11 @@
 
     div {
       margin-right: 55px;
+
       input {
         width: 100px;
       }
+
       textarea {
         width: 130px;
       }
@@ -23,6 +26,11 @@
 
 .action-block {
   margin-right: 85px;
+}
+
+.date-input {
+  visibility: hidden;
+  width: 0;
 }
 
 .spacer {
@@ -36,4 +44,13 @@
 
 .bottom-toolbar {
   margin-top: 30px;
+}
+
+::ng-deep .mat-calendar-header,
+::ng-deep .mat-calendar-body-label {
+  display: none;
+}
+
+::ng-deep .mat-datepicker-content .mat-calendar {
+  height: 100% !important;
 }

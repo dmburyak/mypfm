@@ -1,3 +1,3 @@
-<h2>Статистика за {{ month }} {{ year }} г.</h2>
+<h2>Статистика за {{ monthName }} {{ year }} г.</h2>
 
-<h4>Всего расходов: {{ costsMap.get('total') }} грн.</h4>
+<h4 *ngIf="costsMap.get('total')">Всего расходов: {{ costsMap.get('total') }} грн.</h4>

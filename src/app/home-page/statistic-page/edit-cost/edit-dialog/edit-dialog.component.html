@@ -1,0 +1,91 @@
+<mat-toolbar color="primary">
+  <span>Редактирование, удаление, добавление затрат</span>
+</mat-toolbar>
+
+<mat-toolbar>
+  <span>Затраты за {{ selectedDate | date: "dd.MM.yyyy"}}</span>
+  <span class="spacer"></span>
+  <input class="date-input" [matDatepicker]="picker"
+         [(ngModel)]="dateToStart" (dateChange)="newDateSelected($event)">
+  <button mat-raised-button (click)="picker.open()">Выбрать другой день</button>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-toolbar>
+
+
+<div mat-dialog-content class="edit-form">
+
+  <form [formGroup]="costForm">
+
+
+    <div class="form-line">
+      <label for="flat">Квартира: </label>
+      <div>
+        <input id="flat" type="number" formControlName="flat"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="kindergarten">Детский сад: </label>
+      <div>
+        <input id="kindergarten" type="number" formControlName="kindergarten"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="food">Еда: </label>
+      <div>
+        <input id="food" type="number" formControlName="food"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="dress">Одежда: </label>
+      <div>
+        <input id="dress" type="number" formControlName="dress"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="medicine">Медицина: </label>
+      <div>
+        <input id="medicine" type="number" formControlName="medicine"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="toys">Игрушки, развлечения: </label>
+      <div>
+        <input id="toys" type="number" formControlName="toys"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="other">Другое: </label>
+      <div>
+        <input id="other" type="number" formControlName="other"> грн.
+      </div>
+    </div>
+
+    <div class="form-line">
+      <label for="comment">Комментарий: </label>
+      <div>
+        <textarea id="comment" formControlName="comment" rows="4"></textarea>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div mat-dialog-actions class="action-block">
+  <span class="spacer"></span>
+  <button mat-raised-button (click)="onNoClick()">Отмена</button>
+  <button mat-raised-button color="primary" (click)="onSaveClick()">Сохранить</button>
+</div>
+
+<mat-toolbar class="bottom-toolbar">
+  <button mat-raised-button color="warn" (click)="deleteCost()" [disabled]="!this.costForm.value.id">Удалить</button>
+  <span class="delete-text">Удалить затраты за этот день?</span>
+</mat-toolbar>
+
+
+

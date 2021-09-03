@@ -5,13 +5,15 @@
     </button>
     <span>Персональный финансовый менеджер</span>
     <span class="spacer"></span>
-    <button mat-raised-button class="menu-button">
+    <input class="date-input" [matDatepicker]="picker">
+    <button mat-raised-button class="menu-button" (click)="openDatePicker(picker)">
+      <mat-datepicker #picker startView="year" [startAt]="selectedDate" (monthSelected)="closeDatePicker($event, picker)"></mat-datepicker>
       <mat-icon>date_range</mat-icon>
-      Выбрать период
+      Выбрать месяц
     </button>
     <button mat-raised-button class="menu-button">
       <mat-icon> insert_chart</mat-icon>
-      Сравнить периоды
+      Сравнить месяцы
     </button>
   </mat-toolbar>
 </p>

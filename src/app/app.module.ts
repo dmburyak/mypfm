@@ -18,15 +18,17 @@ import { HeaderComponent } from './shared/header/header.component';
 import { BarChartComponent } from './home-page/compare-page/bar-chart/bar-chart.component';
 import { PieChartComponent } from './home-page/statistic-page/pie-chart/pie-chart.component';
 import { TableComponent } from './home-page/statistic-page/table/table.component';
-import { EditFormComponent } from './home-page/statistic-page/edit-dialog/edit-form/edit-form.component';
+import { EditDialogComponent } from './home-page/statistic-page/edit-cost/edit-dialog/edit-dialog.component';
 import { SelectPeriodDialogComponent } from './home-page/dialogs/select-period-dialog/select-period-dialog.component';
 import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-periods-dialog/compare-periods-dialog.component';
 import { StatisticHeaderComponent } from './home-page/statistic-page/statistic-header/statistic-header.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { EditDialogComponent } from './home-page/statistic-page/edit-dialog/edit-dialog.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { EditCostComponent } from './home-page/statistic-page/edit-cost/edit-cost.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -39,11 +41,11 @@ import { MatInputModule } from '@angular/material/input';
     BarChartComponent,
     PieChartComponent,
     TableComponent,
-    EditFormComponent,
+    EditDialogComponent,
     SelectPeriodDialogComponent,
     ComparePeriodsDialogComponent,
     StatisticHeaderComponent,
-    EditDialogComponent
+    EditCostComponent
   ],
   imports: [
     BrowserModule,
@@ -57,10 +59,15 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatesService } from '../../services/dates.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  selectedDate: Date = new Date();
+
+  constructor(private datesService: DatesService) {
+  }
 
   ngOnInit(): void {
+  }
+
+  openDatePicker(picker: any) {
+    picker.open();
+  }
+
+  closeDatePicker(selectedDate: any, picker: any) {
+    this.selectedDate = selectedDate;
+    this.datesService.onNewDateSelected(selectedDate);
+    picker.close();
   }
 
 }

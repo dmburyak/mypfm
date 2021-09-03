@@ -16,7 +16,7 @@ export class CategoriesService {
   }
 
   getAll() {
-    this.http.get(`${environment.apiURL}/categories.json.ts`)
+    this.http.get(`${environment.apiURL}/categories/`)
       .subscribe(categories => {
         this.categoriesSource.next(categories as Category[]);
       });

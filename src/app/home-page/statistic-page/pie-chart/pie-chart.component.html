@@ -1,4 +1,4 @@
-<div class="chart">
+<div class="chart" *ngIf="showChart">
   <canvas baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"

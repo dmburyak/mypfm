@@ -8,7 +8,7 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
   styleUrls: ['./pie-chart.component.scss']
 })
 
-export class PieChartComponent {
+export class PieChartComponent implements OnInit{
 
   @Input() pieChartData!: SingleDataSet;
   @Input() pieChartType!: ChartType;
@@ -16,10 +16,13 @@ export class PieChartComponent {
   @Input() pieChartPlugins = [];
   @Input() pieChartOptions!: ChartOptions;
   @Input() pieChartLabels!: Label[];
+  @Input() showChart = false;
 
   constructor() {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
+
+  ngOnInit() {}
 
 }
