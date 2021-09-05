@@ -83,8 +83,8 @@
 </div>
 
 <mat-toolbar class="bottom-toolbar">
-  <button mat-raised-button color="warn" (click)="deleteCost()" [disabled]="!this.costForm.value.id">Удалить</button>
-  <span class="delete-text">Удалить затраты за этот день?</span>
+  <button mat-raised-button color="warn" (click)="onDeleteClick()" [disabled]="!this.costForm.value.id">Удалить</button>
+  <span class="delete-text" [class.grey-text]="!this.costForm.value.id">Удалить затраты за этот день?</span>
 </mat-toolbar>
 
 

@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { Cost } from '../../../../models/cost';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { CostsService } from '../../../../services/costs.service';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -13,6 +14,8 @@ export class EditDialogComponent implements OnInit {
 
   dateToStart: Date = new Date();
   selectedDay!: number;
+  selectedMonth!: number;
+  selectedYear!: number;
   selectedDate!: Date;
   selectedDayCost: Cost | undefined;
 
@@ -34,7 +37,8 @@ export class EditDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: [Cost[], number, number],
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private costsService: CostsService) {
   }
 
   ngOnInit(): void {
@@ -61,6 +65,7 @@ export class EditDialogComponent implements OnInit {
   newDateSelected(event: MatDatepickerInputEvent<Date>) {
     this.selectedDate = event.value!;
     this.selectedDay = this.selectedDate.getDate();
+    this.selectedYear = this.selectedDate.getFullYear();
     this.setSelectedDayCost(this.selectedDay);
   }
 
@@ -70,15 +75,15 @@ export class EditDialogComponent implements OnInit {
 
   onSaveClick() {
     const dayCost: Cost = {
-      // ...this.data,
       ...this.costForm.value,
       date: this.selectedDate
     }
-    console.log(dayCost);
     this.dialogRef.close(dayCost);
   }
 
-  deleteCost() {
-    console.log(this.costForm.value.id);
+  onDeleteClick() {
+    if (this.costForm.value.id) {
+      this.dialogRef.close(this.costForm.value.id);
+    }
   }
 }

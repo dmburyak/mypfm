@@ -30,23 +30,32 @@ export class EditCostComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-      .subscribe((result: Cost | undefined) => {
+      .subscribe((result: any) => {
+          switch (typeof result) {
+            case 'undefined':
+              break;
 
-          if (!result) return;
+            case 'object':
+              if (!!result.id) {
+                this.costsService.updateCost(result.id, result)
+                  .subscribe(() => {
+                    this.costsService.getAllCosts(this.year, this.month + 1);
+                  });
+              } else if (this.newCostsIsEmpty(result)) {
+                return;
+              } else {
+                this.costsService.addCost(result)
+                  .subscribe(() => {
+                    this.costsService.getAllCosts(this.year, this.month + 1);
+                  });
+              }
+              break;
 
-          if (!!result.id) {
-            this.costsService.updateCost(result.id, result)
-              .subscribe(() => {
-                this.costsService.getAllCosts(this.year, this.month + 1);
-              });
-          } else if (this.newCostsIsEmpty(result)) {
-            return;
-          } else {
-
-            this.costsService.addCost(result)
-              .subscribe(() => {
-                this.costsService.getAllCosts(this.year, this.month + 1);
-              });
+            case 'number':
+              this.costsService.deleteCost(result)
+                .subscribe(() => {
+                  this.costsService.getAllCosts(this.year, this.month + 1);
+                });
           }
         }
       )
@@ -57,7 +66,7 @@ export class EditCostComponent implements OnInit {
     if (!data.id) {
       for (let key in data) {
         console.log(key);
-        if ( key != 'date' && data[key as keyof Cost] != null) checkValue = false;
+        if (key != 'date' && data[key as keyof Cost] != null) checkValue = false;
       }
     }
     return checkValue;
