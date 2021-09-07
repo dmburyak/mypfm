@@ -29,6 +29,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { ConfirmDialogComponent } from './home-page/statistic-page/edit-cost/edit-dialog/confirm-dialog/confirm-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
     SelectPeriodDialogComponent,
     ComparePeriodsDialogComponent,
     StatisticHeaderComponent,
-    EditCostComponent
+    EditCostComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
     ChartsModule,
     ReactiveFormsModule,
     FormsModule

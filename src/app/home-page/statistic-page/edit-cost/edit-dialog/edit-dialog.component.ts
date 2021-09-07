@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { Cost } from '../../../../models/cost';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DatesService } from '../../../../services/dates.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -36,9 +37,10 @@ export class EditDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: [Cost[], number, number],
+    @Inject(MAT_DIALOG_DATA) public data: Cost[],
     private fb: FormBuilder,
-    private datesService: DatesService) {
+    private datesService: DatesService,
+    public confirmDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -52,7 +54,7 @@ export class EditDialogComponent implements OnInit {
   }
 
   setSelectedDayCost(selectedDay: number) {
-    this.selectedDayCost = this.data[0].find(cost => new Date(cost.date).getDate() === selectedDay);
+    this.selectedDayCost = this.data.find(cost => new Date(cost.date).getDate() === selectedDay);
     if (!!this.selectedDayCost) {
       this.costForm.patchValue(this.selectedDayCost);
     } else {
@@ -64,13 +66,11 @@ export class EditDialogComponent implements OnInit {
     this.selectedDate = event.value!;
     this.selectedDay = this.selectedDate.getDate();
     this.selectedYear = this.selectedDate.getFullYear();
-    // this.setSelectedDayCost(this.selectedDay);
 
     this.datesService.onNewDateSelected(this.selectedDate);
   }
 
   onNoClick(): void {
-    // this.resetSelectedlDate();
     this.dialogRef.close();
   }
 
@@ -79,21 +79,26 @@ export class EditDialogComponent implements OnInit {
       ...this.costForm.value,
       date: this.selectedDate
     }
-    // this.resetSelectedlDate();
     this.dialogRef.close(dayCost);
   }
 
   onDeleteClick() {
-    // this.resetSelectedlDate();
-    if (this.costForm.value.id) {
-      this.dialogRef.close(this.costForm.value.id);
-    }
+    this.openDialog();
   }
 
-  resetSelectedlDate() {
-    if (new Date().getMonth() === this.selectedDate.getMonth()) {
-      this.datesService.onNewDateSelected(new Date());
-    }
+  openDialog(): void {
+    const dialogRef = this.confirmDialog.open(ConfirmDialogComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.costForm.value.id) {
+          this.dialogRef.close(this.costForm.value.id);
+        }
+      }
+    });
   }
+
 
 }

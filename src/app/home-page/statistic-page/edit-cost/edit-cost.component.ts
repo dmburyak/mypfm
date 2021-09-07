@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CostsService } from '../../../services/costs.service';
 import { Cost } from '../../../models/cost';
 import { DatesService } from '../../../services/dates.service';
+import { SnackBarService } from '../../../services/snack-bar.service';
 
 @Component({
   selector: 'app-edit-cost',
@@ -17,26 +18,29 @@ export class EditCostComponent implements OnInit {
   @Input() month = 0;
 
   selectedDate!: Date;
+  successUpdateText = 'Данные успешно обновлены!';
+  successAddText = 'Данные успешно добавлены!';
+  successDeleteText = 'Данные успешно удалены!';
+
+  failedText = 'Что-то пошло не так. Повторите операцию позже!';
 
   constructor(public dialog: MatDialog,
               private costsService: CostsService,
-              private datesService: DatesService) {
+              private datesService: DatesService,
+              private snackBarService: SnackBarService) {
   }
 
   openDialog(): void {
 
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: '525px',
-      data: [
-        this.costs,
-        this.year,
-        this.month],
+      data: this.costs,
     });
 
     dialogRef.afterClosed()
       .subscribe((result: any) => {
 
-        this.resetSelectedDate();
+          this.resetSelectedDate();
 
           switch (typeof result) {
             case 'undefined':
@@ -46,23 +50,38 @@ export class EditCostComponent implements OnInit {
               if (!!result.id) {
                 this.costsService.updateCost(result.id, result)
                   .subscribe(() => {
-                    this.costsService.getAllCosts(this.year, this.month + 1);
-                  });
+                      this.snackBarService.openSuccessSnackBar(this.successUpdateText);
+                      this.costsService.getAllCosts(this.year, this.month + 1);
+                    },
+                    (message) => {
+                      this.snackBarService.openFailedSnackBar(this.failedText);
+                      console.log(message);
+                    });
               } else if (this.newCostsIsEmpty(result)) {
                 return;
               } else {
                 this.costsService.addCost(result)
                   .subscribe(() => {
-                    this.costsService.getAllCosts(this.year, this.month + 1);
-                  });
+                      this.snackBarService.openSuccessSnackBar(this.successAddText);
+                      this.costsService.getAllCosts(this.year, this.month + 1);
+                    },
+                    (message) => {
+                      this.snackBarService.openFailedSnackBar(this.failedText);
+                      console.log(message);
+                    });
               }
               break;
 
             case 'number':
               this.costsService.deleteCost(result)
                 .subscribe(() => {
-                  this.costsService.getAllCosts(this.year, this.month + 1);
-                });
+                    this.snackBarService.openSuccessSnackBar(this.successDeleteText);
+                    this.costsService.getAllCosts(this.year, this.month + 1);
+                  },
+                  (message) => {
+                    this.snackBarService.openFailedSnackBar(this.failedText);
+                    console.log(message);
+                  });
           }
         }
       )

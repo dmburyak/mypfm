@@ -122,7 +122,6 @@ export class StatisticPageComponent implements OnInit {
   }
 
   onRowClick(date: Date) {
-    console.log(date);
     this.editCost.openDialog();
     this.datesService.onNewDateSelected(date);
   }

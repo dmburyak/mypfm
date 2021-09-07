@@ -13,6 +13,5 @@ export class DatesService {
 
   onNewDateSelected(date: Date): void {
     this.dateSource.next(date);
-    console.log(date);
   }
 }

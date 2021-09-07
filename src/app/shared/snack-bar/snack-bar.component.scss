@@ -1,0 +1,19 @@
+.green-snackbar {
+  background: darkslategray;
+  color: white;
+
+  .mat-simple-snackbar {
+    justify-content: center;
+  }
+}
+
+.red-snackbar {
+  background: coral;
+  color: black;
+
+  .mat-simple-snackbar {
+    justify-content: center;
+  }
+}
+
+

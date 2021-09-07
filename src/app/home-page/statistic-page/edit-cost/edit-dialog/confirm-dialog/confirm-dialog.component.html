@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p class="confirmation-text">Вы действительно хотите удалить<br> запись о расходах за этот день?</p>
+</div>
+<div mat-dialog-actions class="button-block">
+  <button mat-raised-button color="primary" (click)="onNoClick()">Отменить</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="confirm" cdkFocusInitial>Подтвердить</button>
+</div>
