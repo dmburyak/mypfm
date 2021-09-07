@@ -14,6 +14,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.datesService.selectedDate$
+      .subscribe(newDate => {
+        this.selectedDate = newDate;
+      })
   }
 
   openDatePicker(picker: any) {
@@ -21,7 +25,6 @@ export class HeaderComponent implements OnInit {
   }
 
   closeDatePicker(selectedDate: any, picker: any) {
-    this.selectedDate = selectedDate;
     this.datesService.onNewDateSelected(selectedDate);
     picker.close();
   }

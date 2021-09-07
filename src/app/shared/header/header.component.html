@@ -7,7 +7,12 @@
     <span class="spacer"></span>
     <input class="date-input" [matDatepicker]="picker">
     <button mat-raised-button class="menu-button" (click)="openDatePicker(picker)">
-      <mat-datepicker #picker startView="year" [startAt]="selectedDate" (monthSelected)="closeDatePicker($event, picker)"></mat-datepicker>
+      <mat-datepicker #picker
+                      startView="year"
+                      [startAt]="selectedDate"
+                      (monthSelected)="closeDatePicker($event, picker)"
+                      panelClass="header-calendar"
+      ></mat-datepicker>
       <mat-icon>date_range</mat-icon>
       Выбрать месяц
     </button>

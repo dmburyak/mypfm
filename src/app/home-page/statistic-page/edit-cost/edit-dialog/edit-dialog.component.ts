@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { Cost } from '../../../../models/cost';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { CostsService } from '../../../../services/costs.service';
+import { DatesService } from '../../../../services/dates.service';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -38,19 +38,17 @@ export class EditDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: [Cost[], number, number],
     private fb: FormBuilder,
-    private costsService: CostsService) {
+    private datesService: DatesService) {
   }
 
   ngOnInit(): void {
-    if (new Date().getMonth() === this.data[2]) {
-      this.selectedDate = new Date();
-      this.selectedDay = this.selectedDate.getDate();
-    } else {
-      this.selectedDate = new Date(this.data[1], this.data[2], 1);
-      this.selectedDay = 1;
-    }
-    this.setSelectedDayCost(this.selectedDay);
-    this.dateToStart = this.selectedDate;
+    this.datesService.selectedDate$
+      .subscribe(newDate => {
+        this.selectedDate = newDate;
+        this.selectedDay = newDate.getDate();
+        this.setSelectedDayCost(this.selectedDay);
+        this.dateToStart = this.selectedDate;
+      })
   }
 
   setSelectedDayCost(selectedDay: number) {
@@ -66,10 +64,13 @@ export class EditDialogComponent implements OnInit {
     this.selectedDate = event.value!;
     this.selectedDay = this.selectedDate.getDate();
     this.selectedYear = this.selectedDate.getFullYear();
-    this.setSelectedDayCost(this.selectedDay);
+    // this.setSelectedDayCost(this.selectedDay);
+
+    this.datesService.onNewDateSelected(this.selectedDate);
   }
 
   onNoClick(): void {
+    // this.resetSelectedlDate();
     this.dialogRef.close();
   }
 
@@ -78,12 +79,21 @@ export class EditDialogComponent implements OnInit {
       ...this.costForm.value,
       date: this.selectedDate
     }
+    // this.resetSelectedlDate();
     this.dialogRef.close(dayCost);
   }
 
   onDeleteClick() {
+    // this.resetSelectedlDate();
     if (this.costForm.value.id) {
       this.dialogRef.close(this.costForm.value.id);
     }
   }
+
+  resetSelectedlDate() {
+    if (new Date().getMonth() === this.selectedDate.getMonth()) {
+      this.datesService.onNewDateSelected(new Date());
+    }
+  }
+
 }

@@ -7,11 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 export class DatesService {
 
   dateSource = new BehaviorSubject<Date>(new Date());
-  costDate$ = this.dateSource.asObservable();
+  selectedDate$ = this.dateSource.asObservable();
 
   constructor() { }
 
   onNewDateSelected(date: Date): void {
     this.dateSource.next(date);
+    console.log(date);
   }
 }

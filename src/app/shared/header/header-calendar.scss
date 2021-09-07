@@ -1,0 +1,20 @@
+.header-calendar {
+
+  height: 100% !important;
+
+  .mat-calendar-period-button {
+    pointer-events: none;
+  }
+
+  .mat-calendar-body-label {
+    display: none;
+  }
+
+  .mat-calendar-header {
+    padding: 0 10px;
+
+    .mat-calendar-controls {
+      margin: 0;
+    }
+  }
+}

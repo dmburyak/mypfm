@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cost } from '../../../models/cost';
 
 @Component({
@@ -10,6 +10,7 @@ export class TableComponent {
 
   @Input() costsMap!: Map<string, number>;
   @Input() costs: Cost[] = [];
+  @Output() rowClick = new EventEmitter;
 
   displayedColumns: string[] = [
     'date',
@@ -23,6 +24,8 @@ export class TableComponent {
     'comment',
   ];
 
-
+  onRowClick(date: Date) {
+    this.rowClick.emit(new Date(date));
+  }
 }
 

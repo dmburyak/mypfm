@@ -6,7 +6,7 @@
   [year]="year"
 ></app-statistic-header>
 
-<app-table [costsMap]="costsMap" [costs]="costs"></app-table>
+<app-table [costsMap]="costsMap" [costs]="costs" (rowClick)="onRowClick($event)"></app-table>
 
 <app-edit-cost [costs]="costs" [month]="month" [year]="year"></app-edit-cost>
 

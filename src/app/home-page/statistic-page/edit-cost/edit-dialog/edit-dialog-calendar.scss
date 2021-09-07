@@ -1,0 +1,10 @@
+.edit-dialog-calendar {
+  .mat-calendar-header,
+  .mat-calendar-body-label {
+    display: none;
+  }
+
+  .mat-datepicker-content .mat-calendar {
+    height: 100% !important;
+  }
+}

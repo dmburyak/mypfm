@@ -3,6 +3,7 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CostsService } from '../../../services/costs.service';
 import { Cost } from '../../../models/cost';
+import { DatesService } from '../../../services/dates.service';
 
 @Component({
   selector: 'app-edit-cost',
@@ -15,8 +16,11 @@ export class EditCostComponent implements OnInit {
   @Input() year = 0;
   @Input() month = 0;
 
+  selectedDate!: Date;
+
   constructor(public dialog: MatDialog,
-              private costsService: CostsService) {
+              private costsService: CostsService,
+              private datesService: DatesService) {
   }
 
   openDialog(): void {
@@ -31,6 +35,9 @@ export class EditCostComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe((result: any) => {
+
+        this.resetSelectedDate();
+
           switch (typeof result) {
             case 'undefined':
               break;
@@ -62,17 +69,26 @@ export class EditCostComponent implements OnInit {
   }
 
   newCostsIsEmpty(data: Cost) {
-    let checkValue = true;
+    let noValues = true;
     if (!data.id) {
       for (let key in data) {
-        console.log(key);
-        if (key != 'date' && data[key as keyof Cost] != null) checkValue = false;
+        if (key != 'date' && data[key as keyof Cost] != null) noValues = false;
       }
     }
-    return checkValue;
+    return noValues;
+  }
+
+  resetSelectedDate() {
+    if (new Date().getMonth() === this.selectedDate.getMonth()) {
+      this.datesService.onNewDateSelected(new Date());
+    }
   }
 
   ngOnInit(): void {
+    this.datesService.selectedDate$
+      .subscribe(newDate => {
+        this.selectedDate = newDate;
+      })
   }
 
 }

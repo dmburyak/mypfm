@@ -15,28 +15,4 @@ mat-toolbar {
   width: 0;
 }
 
-::ng-deep mat-calendar {
-
-  .mat-calendar-period-button {
-    //visibility: hidden;
-    pointer-events: none;
-  }
-
-  .mat-calendar-body-label {
-    display: none;
-  }
-
-  .mat-calendar-header {
-    padding: 0 10px;
-
-    .mat-calendar-controls {
-      margin: 0;
-    }
-  }
-}
-
-::ng-deep .mat-calendar {
-  height: 100% !important;
-}
-
 

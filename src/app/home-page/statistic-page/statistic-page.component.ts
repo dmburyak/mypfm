@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { Cost } from '../../models/cost';
 import { CostsService } from '../../services/costs.service';
 import { DatesService } from '../../services/dates.service';
+import { TableComponent } from './table/table.component';
+import { EditCostComponent } from './edit-cost/edit-cost.component';
 
 @Component({
   selector: 'app-statistic-page',
@@ -12,8 +14,10 @@ import { DatesService } from '../../services/dates.service';
 })
 export class StatisticPageComponent implements OnInit {
 
-year = 0;
-month = 0;
+  @ViewChild(EditCostComponent) editCost!: EditCostComponent;
+
+  year = 0;
+  month = 0;
 
   months = [
     'январь',
@@ -71,11 +75,11 @@ month = 0;
   }
 
   ngOnInit(): void {
-    this.datesService.costDate$
-      .subscribe(date => {
-        this.month = date.getMonth();
-        this.year = date.getFullYear();
-        this.day = date.getDate();
+    this.datesService.selectedDate$
+      .subscribe(newDate => {
+        this.month = newDate.getMonth();
+        this.year = newDate.getFullYear();
+        this.day = newDate.getDate();
         this.costsService.getAllCosts(this.year, this.month + 1);
       })
 
@@ -117,4 +121,9 @@ month = 0;
 
   }
 
+  onRowClick(date: Date) {
+    console.log(date);
+    this.editCost.openDialog();
+    this.datesService.onNewDateSelected(date);
+  }
 }

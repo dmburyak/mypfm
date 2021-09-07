@@ -3,12 +3,12 @@
 </mat-toolbar>
 
 <mat-toolbar>
-  <span>Затраты за {{ selectedDate | date: "dd.MM.yyyy"}}</span>
+  <div>Затраты за <span class="cost-day">{{ selectedDate | date: "dd.MM.yyyy"}}</span></div>
   <span class="spacer"></span>
   <input class="date-input" [matDatepicker]="picker"
          [(ngModel)]="dateToStart" (dateChange)="newDateSelected($event)">
   <button mat-raised-button (click)="picker.open()">Выбрать другой день</button>
-  <mat-datepicker #picker></mat-datepicker>
+  <mat-datepicker #picker panelClass="edit-dialog-calendar"></mat-datepicker>
 </mat-toolbar>
 
 
