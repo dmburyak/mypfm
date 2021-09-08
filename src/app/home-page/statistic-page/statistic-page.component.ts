@@ -83,7 +83,7 @@ export class StatisticPageComponent implements OnInit {
         this.costsService.getAllCosts(this.year, this.month + 1);
       })
 
-    this.costsService.cost$
+    this.costsService.costs$
       .subscribe(result => {
         this.costs = result;
         this.getAllCostTotal();

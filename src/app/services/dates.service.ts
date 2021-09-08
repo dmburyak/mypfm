@@ -6,12 +6,16 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DatesService {
 
+  lastDate = new Date();
   dateSource = new BehaviorSubject<Date>(new Date());
   selectedDate$ = this.dateSource.asObservable();
 
-  constructor() { }
+  constructor() {
+  }
 
   onNewDateSelected(date: Date): void {
-    this.dateSource.next(date);
+    if (this.lastDate !== date) {
+      this.dateSource.next(date);
+    }
   }
 }

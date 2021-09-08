@@ -33,7 +33,7 @@ export class EditCostComponent implements OnInit {
   openDialog(): void {
 
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      width: '525px',
+      // width: '500px',
       data: this.costs,
     });
 

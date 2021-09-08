@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class CostsService {
 
   costsSource = new BehaviorSubject<Cost[]>([]);
-  cost$ = this.costsSource.asObservable();
+  costs$ = this.costsSource.asObservable();
 
   constructor(private http: HttpClient) {
   }
