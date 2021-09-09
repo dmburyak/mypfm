@@ -6,7 +6,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +30,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { ConfirmDialogComponent } from './home-page/statistic-page/edit-cost/edit-dialog/confirm-dialog/confirm-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ChartsModule } from 'ng2-charts';
+import { CompareHeaderComponent } from './home-page/compare-page/compare-header/compare-header.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ComparePeriodsDialogComponent,
     StatisticHeaderComponent,
     EditCostComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CompareHeaderComponent
   ],
   imports: [
     BrowserModule,

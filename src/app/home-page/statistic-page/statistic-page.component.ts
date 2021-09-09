@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { Cost } from '../../models/cost';
@@ -6,6 +6,7 @@ import { CostsService } from '../../services/costs.service';
 import { DatesService } from '../../services/dates.service';
 import { TableComponent } from './table/table.component';
 import { EditCostComponent } from './edit-cost/edit-cost.component';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-statistic-page',
@@ -14,26 +15,12 @@ import { EditCostComponent } from './edit-cost/edit-cost.component';
 })
 export class StatisticPageComponent implements OnInit {
 
+  @Input() categories = [];
   @ViewChild(EditCostComponent) editCost!: EditCostComponent;
 
   year = 0;
   month = 0;
-
-  months = [
-    'январь',
-    'февраль',
-    'март',
-    'апрель',
-    'май',
-    'июнь',
-    'июль',
-    'август',
-    'сентябрь',
-    'октябрь',
-    'ноябрь',
-    'декабрь',
-  ]
-
+  months: string[] = [];
   day = 1;
 
   // Table
@@ -61,20 +48,18 @@ export class StatisticPageComponent implements OnInit {
       align: 'start'
     }
   };
-  public pieChartLabels: Label[] = [
-    'Квартира',
-    'Детский сад',
-    'Еда',
-    'Одежда',
-    'Медицина',
-    ['Игрушки и', 'развлечения'],
-    'Другое'
-  ];
+  public pieChartLabels: Label[] = [];
 
-  constructor(private costsService: CostsService, private datesService: DatesService) {
+  constructor(
+    private costsService: CostsService,
+    private datesService: DatesService,
+    private dataService: DataService) {
   }
 
   ngOnInit(): void {
+    this.pieChartLabels = this.dataService.categories;
+    this.months = this.dataService.months;
+
     this.datesService.selectedDate$
       .subscribe(newDate => {
         this.month = newDate.getMonth();

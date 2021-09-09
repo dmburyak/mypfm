@@ -7,6 +7,16 @@ import { Component } from '@angular/core';
 })
 export class HomePageComponent {
 
+  categories = [
+    'Квартира',
+    'Детский сад',
+    'Еда',
+    'Одежда',
+    'Медицина',
+    ['Игрушки и', 'развлечения'],
+    'Другое'
+  ];
+
   constructor() {
   }
 

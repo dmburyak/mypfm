@@ -1,1 +1,13 @@
-<p>compare-page works!</p>
+<div class="wrapper">
+
+  <app-compare-header
+    [periodName1]="periodName1"
+    [periodName2]="periodName2"
+  ></app-compare-header>
+
+  <app-bar-chart
+    [barChartData]="barChartData"
+    [barChartLabels]="barChartLabels"
+  ></app-bar-chart>
+
+</div>

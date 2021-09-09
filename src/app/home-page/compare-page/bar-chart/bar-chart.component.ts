@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-bar-chart',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarChartComponent implements OnInit {
 
-  constructor() { }
+  @Input() barChartData: ChartDataSets[] = [];
+  @Input() barChartLabels: Label[] = [];
 
-  ngOnInit(): void {
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'top'
+    }
+  };
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  constructor() {
+  }
+
+  ngOnInit() {
+
   }
 
 }
