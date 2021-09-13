@@ -51,7 +51,7 @@ export class EditCostComponent implements OnInit {
                 this.costsService.updateCost(result.id, result)
                   .subscribe(() => {
                       this.snackBarService.openSuccessSnackBar(this.successUpdateText);
-                      this.costsService.getAllCosts(this.year, this.month + 1);
+                      this.costsService.getMonthCosts(this.year, this.month + 1);
                     },
                     (message) => {
                       this.snackBarService.openFailedSnackBar(this.failedText);
@@ -63,7 +63,7 @@ export class EditCostComponent implements OnInit {
                 this.costsService.addCost(result)
                   .subscribe(() => {
                       this.snackBarService.openSuccessSnackBar(this.successAddText);
-                      this.costsService.getAllCosts(this.year, this.month + 1);
+                      this.costsService.getMonthCosts(this.year, this.month + 1);
                     },
                     (message) => {
                       this.snackBarService.openFailedSnackBar(this.failedText);
@@ -76,7 +76,7 @@ export class EditCostComponent implements OnInit {
               this.costsService.deleteCost(result)
                 .subscribe(() => {
                     this.snackBarService.openSuccessSnackBar(this.successDeleteText);
-                    this.costsService.getAllCosts(this.year, this.month + 1);
+                    this.costsService.getMonthCosts(this.year, this.month + 1);
                   },
                   (message) => {
                     this.snackBarService.openFailedSnackBar(this.failedText);

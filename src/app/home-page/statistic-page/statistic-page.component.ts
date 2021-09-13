@@ -4,9 +4,8 @@ import { Label, SingleDataSet } from 'ng2-charts';
 import { Cost } from '../../models/cost';
 import { CostsService } from '../../services/costs.service';
 import { DatesService } from '../../services/dates.service';
-import { TableComponent } from './table/table.component';
 import { EditCostComponent } from './edit-cost/edit-cost.component';
-import { DataService } from '../../services/data.service';
+import { DictionariesService } from '../../services/dictionaries.service';
 
 @Component({
   selector: 'app-statistic-page',
@@ -20,52 +19,36 @@ export class StatisticPageComponent implements OnInit {
 
   year = 0;
   month = 0;
-  months: string[] = [];
   day = 1;
+  monthNames: string[] = [];
 
   // Table
   costsMap: Map<string, number> = new Map();
   costs: Cost[] = [];
-  costColumns: string[] = [
-    'flat',
-    'kindergarten',
-    'food',
-    'dress',
-    'medicine',
-    'toys',
-    'other'
-  ];
+  costCategoriesKeys: string[] = [];
 
   // Pie chart
   public pieChartData: SingleDataSet = [];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-    legend: {
-      position: 'left',
-      align: 'start'
-    }
-  };
   public pieChartLabels: Label[] = [];
 
   constructor(
     private costsService: CostsService,
     private datesService: DatesService,
-    private dataService: DataService) {
+    private dictionaries: DictionariesService) {
   }
 
   ngOnInit(): void {
-    this.pieChartLabels = this.dataService.categories;
-    this.months = this.dataService.months;
+    this.pieChartLabels = this.dictionaries.getCategoriesNames();
+    this.monthNames = this.dictionaries.monthsDic;
+
+    this.costCategoriesKeys = this.dictionaries.getCategoriesKeys();
 
     this.datesService.selectedDate$
       .subscribe(newDate => {
         this.month = newDate.getMonth();
         this.year = newDate.getFullYear();
         this.day = newDate.getDate();
-        this.costsService.getAllCosts(this.year, this.month + 1);
+        this.costsService.getMonthCosts(this.year, this.month + 1);
       })
 
     this.costsService.costs$
@@ -74,11 +57,12 @@ export class StatisticPageComponent implements OnInit {
         this.getAllCostTotal();
       });
 
+    // this.costsService.addCostsToAllMonthCosts(2021,1);
   }
 
   getAllCostTotal() {
 
-    this.costColumns.forEach(name => {
+    this.costCategoriesKeys.forEach(name => {
       let sum = 0;
       this.costs.forEach(cost => {
           sum += <number>cost[name as keyof Cost];
@@ -95,13 +79,13 @@ export class StatisticPageComponent implements OnInit {
     this.costsMap.set('total', totalSum);
 
     this.pieChartData = [
-      this.costsMap.get('flat'),
-      this.costsMap.get('kindergarten'),
-      this.costsMap.get('food'),
-      this.costsMap.get('dress'),
-      this.costsMap.get('medicine'),
-      this.costsMap.get('toys'),
-      this.costsMap.get('other'),
+      this.costsMap.get(this.costCategoriesKeys[0]),
+      this.costsMap.get(this.costCategoriesKeys[1]),
+      this.costsMap.get(this.costCategoriesKeys[2]),
+      this.costsMap.get(this.costCategoriesKeys[3]),
+      this.costsMap.get(this.costCategoriesKeys[4]),
+      this.costsMap.get(this.costCategoriesKeys[5]),
+      this.costsMap.get(this.costCategoriesKeys[6]),
     ]
 
   }

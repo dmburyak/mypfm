@@ -2,7 +2,7 @@
 
 <app-statistic-header
   [costsMap]="costsMap"
-  [monthName]="months[month]"
+  [monthName]="monthNames[month]"
   [year]="year"
 ></app-statistic-header>
 
@@ -12,10 +12,6 @@
 
 <app-pie-chart
   [pieChartData]="pieChartData"
-  [pieChartType]="pieChartType"
-  [pieChartLegend]="pieChartLegend"
-  [pieChartPlugins]="pieChartPlugins"
-  [pieChartOptions]="pieChartOptions"
   [pieChartLabels]="pieChartLabels"
   [showChart]="!!costsMap.get('total')"
 ></app-pie-chart>

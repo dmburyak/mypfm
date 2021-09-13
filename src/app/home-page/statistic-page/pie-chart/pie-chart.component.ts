@@ -11,12 +11,19 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 export class PieChartComponent implements OnInit{
 
   @Input() pieChartData!: SingleDataSet;
-  @Input() pieChartType!: ChartType;
-  @Input() pieChartLegend!: boolean;
-  @Input() pieChartPlugins = [];
-  @Input() pieChartOptions!: ChartOptions;
   @Input() pieChartLabels!: Label[];
   @Input() showChart = false;
+
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'left',
+      align: 'start'
+    }
+  };
 
   constructor() {
     monkeyPatchChartJsTooltip();

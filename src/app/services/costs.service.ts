@@ -3,22 +3,43 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Cost } from '../models/cost';
 import { environment } from '../../environments/environment';
+import { monthCosts } from '../models/monthCosts';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CostsService {
 
+  categoryKeysDic = [
+    'flat',
+    'kindergarten',
+    'food',
+    'dress',
+    'medicine',
+    'toys',
+    'other'
+  ];
+
+  allMonthCosts: monthCosts = {};
+
   costsSource = new BehaviorSubject<Cost[]>([]);
   costs$ = this.costsSource.asObservable();
+
+  monthCostsSource = new BehaviorSubject<monthCosts>(this.allMonthCosts);
+  monthCosts$ = this.monthCostsSource.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
-  getAllCosts(year: number, month: number): void {
+  getMonthCosts(year: number, month: number): void {
     this.http.get(`${environment.apiURL}/costs/${year}/${month}`)
       .subscribe(result => {
+
         this.costsSource.next(result as Cost[]);
+
+        this.monthCostsSource.next(
+          this.addCostsToAllMonthCosts(year, month, result as Cost[])
+        )
       })
   }
 
@@ -33,4 +54,38 @@ export class CostsService {
   deleteCost(id: number) {
     return this.http.delete(`${environment.apiURL}/costs/${id}/delete`);
   }
+
+  getMonthTotal(costs: Cost[]) {
+
+    let categoryTotalCosts: { [x: string]: number } = {};
+
+    this.categoryKeysDic.forEach(name => {
+      let sum = 0;
+      costs.forEach(costs => {
+        for (let key in costs) {
+          if (key === name) {
+            sum += <number>costs[key as keyof Cost];
+          }
+        }
+      })
+      categoryTotalCosts = {
+        ...categoryTotalCosts,
+        [name]: sum
+      }
+    })
+    return categoryTotalCosts;
+  }
+
+  addCostsToAllMonthCosts(year: number, month: number, result: Cost[]) {
+
+    let total = this.getMonthTotal(result);
+
+    this.allMonthCosts[year] = {
+      ...this.allMonthCosts[year],
+      [month]: {costs: result, total: total}
+    };
+        console.log(this.allMonthCosts);
+        return this.allMonthCosts;
+  };
+
 }

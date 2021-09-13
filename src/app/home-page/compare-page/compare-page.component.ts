@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cost } from '../../models/cost';
 import { CostsService } from '../../services/costs.service';
-import { DataService } from '../../services/data.service';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -20,7 +19,6 @@ export class ComparePageComponent implements OnInit {
   periodName1 = `${this.monthName1} ${this.year1}`;
   periodName2 = `${this.monthName2} ${this.year2}`;
 
-  categories: (string | string[])[] = [];
   months: string[] = [];
 
   twoMonthsCosts: { one: Cost[], two: Cost[] } = {one: [], two: []};
@@ -30,20 +28,18 @@ export class ComparePageComponent implements OnInit {
   barChartLabels: Label[] = [];
 
   constructor(
-    private costsService: CostsService,
-    private dataService: DataService) {
+    private costsService: CostsService) {
   }
 
   ngOnInit(): void {
-    this.categories = this.dataService.categories;
-    this.months = this.dataService.months;
+    // this.months = this.dicService.monthsDic;
 
     this.barChartData = [
       { data: [65, 59, 20, 81, 56, 55, 40], label: this.periodName1 },
       { data: [28, 35, 40, 19, 86, 27, 90], label: this.periodName2 }
     ];
 
-  this.barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  // this.barChartLabels = this.dicService.categoryNamesDic;
 
     this.costsService.costs$
       .subscribe(costs => {
@@ -55,10 +51,10 @@ export class ComparePageComponent implements OnInit {
           this.period = 1;
         }
       })
-    this.costsService.getAllCosts(2021, 8);
-    this.costsService.getAllCosts(2021, 9);
+    this.costsService.getMonthCosts(2021, 8);
+    this.costsService.getMonthCosts(2021, 9);
 
-    setTimeout(() => console.log(this.twoMonthsCosts), 3000)
+    // setTimeout(() => console.log(this.twoMonthsCosts), 3000)
   }
 
 
