@@ -10,43 +10,43 @@
   <ng-container matColumnDef="flat">
     <th mat-header-cell *matHeaderCellDef> Квартира </th>
     <td mat-cell *matCellDef="let cost"> {{cost.flat}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('flat') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[0] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="kindergarten">
     <th mat-header-cell *matHeaderCellDef> Детский сад </th>
     <td mat-cell *matCellDef="let cost"> {{cost.kindergarten}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('kindergarten') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[1] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="food">
     <th mat-header-cell *matHeaderCellDef> Еда </th>
     <td mat-cell *matCellDef="let cost"> {{cost.food}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('food') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[2] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="dress">
     <th mat-header-cell *matHeaderCellDef> Одежда </th>
     <td mat-cell *matCellDef="let cost"> {{cost.dress}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('dress') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[3] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="medicine">
     <th mat-header-cell *matHeaderCellDef> Медицина </th>
     <td mat-cell *matCellDef="let cost"> {{cost.medicine}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('medicine') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[4] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="toys">
     <th mat-header-cell *matHeaderCellDef> Игрушки, развлечения </th>
     <td mat-cell *matCellDef="let cost"> {{cost.toys}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('toys') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[5] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="other">
     <th mat-header-cell *matHeaderCellDef> Другое </th>
     <td mat-cell *matCellDef="let cost"> {{cost.other}} </td>
-    <td mat-footer-cell *matFooterCellDef> {{ costsMap.get('other') }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ categoriesTotal[6] }} </td>
   </ng-container>
 
   <ng-container matColumnDef="comment">

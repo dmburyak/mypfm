@@ -8,7 +8,7 @@ import { Cost } from '../../../models/cost';
 })
 export class TableComponent {
 
-  @Input() costsMap!: Map<string, number>;
+  @Input() categoriesTotal: number[] = [];
   @Input() costs: Cost[] = [];
   @Output() rowClick = new EventEmitter;
 

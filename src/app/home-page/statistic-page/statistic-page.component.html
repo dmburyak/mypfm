@@ -1,19 +1,27 @@
 <div class="wrapper">
 
-<app-statistic-header
-  [costsMap]="costsMap"
-  [monthName]="monthNames[month]"
-  [year]="year"
-></app-statistic-header>
+  <app-statistic-header
+    [year]="year"
+    [monthName]="monthNames[month]"
+    [monthTotal]="monthTotal"
+  ></app-statistic-header>
 
-<app-table [costsMap]="costsMap" [costs]="costs" (rowClick)="onRowClick($event)"></app-table>
+  <app-table
+    [categoriesTotal]="categoriesTotal"
+    [costs]="costs"
+    (rowClick)="onRowClick($event)"
+  ></app-table>
 
-<app-edit-cost [costs]="costs" [month]="month" [year]="year"></app-edit-cost>
+  <app-edit-cost
+    [costs]="costs"
+    [month]="month"
+    [year]="year"
+  ></app-edit-cost>
 
-<app-pie-chart
-  [pieChartData]="pieChartData"
-  [pieChartLabels]="pieChartLabels"
-  [showChart]="!!costsMap.get('total')"
-></app-pie-chart>
+  <app-pie-chart
+    [pieChartData]="pieChartData"
+    [pieChartLabels]="pieChartLabels"
+    [showChart]="showChart"
+  ></app-pie-chart>
 
 </div>

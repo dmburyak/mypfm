@@ -41,18 +41,18 @@ export class ComparePageComponent implements OnInit {
 
   // this.barChartLabels = this.dicService.categoryNamesDic;
 
-    this.costsService.costs$
-      .subscribe(costs => {
-        if (this.period === 1) {
-          this.twoMonthsCosts.one = costs;
-          this.period = 2;
-        } else {
-          this.twoMonthsCosts.two = costs;
-          this.period = 1;
-        }
-      })
-    this.costsService.getMonthCosts(2021, 8);
-    this.costsService.getMonthCosts(2021, 9);
+    // this.costsService.costs$
+    //   .subscribe(costs => {
+    //     if (this.period === 1) {
+    //       this.twoMonthsCosts.one = costs;
+    //       this.period = 2;
+    //     } else {
+    //       this.twoMonthsCosts.two = costs;
+    //       this.period = 1;
+    //     }
+    //   })
+    // this.costsService.getMonthCosts(2021, 8);
+    // this.costsService.getMonthCosts(2021, 9);
 
     // setTimeout(() => console.log(this.twoMonthsCosts), 3000)
   }

@@ -22,9 +22,6 @@ export class CostsService {
 
   allMonthCosts: monthCosts = {};
 
-  costsSource = new BehaviorSubject<Cost[]>([]);
-  costs$ = this.costsSource.asObservable();
-
   monthCostsSource = new BehaviorSubject<monthCosts>(this.allMonthCosts);
   monthCosts$ = this.monthCostsSource.asObservable();
 
@@ -33,12 +30,9 @@ export class CostsService {
 
   getMonthCosts(year: number, month: number): void {
     this.http.get(`${environment.apiURL}/costs/${year}/${month}`)
-      .subscribe(result => {
-
-        this.costsSource.next(result as Cost[]);
-
+      .subscribe(costs => {
         this.monthCostsSource.next(
-          this.addCostsToAllMonthCosts(year, month, result as Cost[])
+          this.addCostsToAllMonthCosts(year, month, costs as Cost[])
         )
       })
   }
@@ -67,7 +61,7 @@ export class CostsService {
             sum += <number>costs[key as keyof Cost];
           }
         }
-      })
+      });
       categoryTotalCosts = {
         ...categoryTotalCosts,
         [name]: sum
@@ -83,9 +77,8 @@ export class CostsService {
     this.allMonthCosts[year] = {
       ...this.allMonthCosts[year],
       [month]: {costs: result, total: total}
-    };
-        console.log(this.allMonthCosts);
-        return this.allMonthCosts;
-  };
+    }
+    return this.allMonthCosts;
+  }
 
 }

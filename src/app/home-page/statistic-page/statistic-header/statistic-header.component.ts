@@ -7,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class StatisticHeaderComponent {
 
-  @Input() costsMap!: Map<string, number>;
-  @Input() monthName = '';
   @Input() year = 0;
+  @Input() monthName = '';
+  @Input() monthTotal: number = 0;
 
 }

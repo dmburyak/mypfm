@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ChartOptions, ChartType } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { Cost } from '../../models/cost';
 import { CostsService } from '../../services/costs.service';
@@ -17,13 +16,15 @@ export class StatisticPageComponent implements OnInit {
   @Input() categories = [];
   @ViewChild(EditCostComponent) editCost!: EditCostComponent;
 
-  year = 0;
-  month = 0;
+  year = new Date().getFullYear();
+  month = new Date().getMonth();
   day = 1;
   monthNames: string[] = [];
+  monthTotal = 0;
+  showChart = false;
 
   // Table
-  costsMap: Map<string, number> = new Map();
+  categoriesTotal: number[] = [];
   costs: Cost[] = [];
   costCategoriesKeys: string[] = [];
 
@@ -40,54 +41,37 @@ export class StatisticPageComponent implements OnInit {
   ngOnInit(): void {
     this.pieChartLabels = this.dictionaries.getCategoriesNames();
     this.monthNames = this.dictionaries.monthsDic;
-
     this.costCategoriesKeys = this.dictionaries.getCategoriesKeys();
 
     this.datesService.selectedDate$
       .subscribe(newDate => {
-        this.month = newDate.getMonth();
         this.year = newDate.getFullYear();
+        this.month = newDate.getMonth();
         this.day = newDate.getDate();
         this.costsService.getMonthCosts(this.year, this.month + 1);
       })
 
-    this.costsService.costs$
-      .subscribe(result => {
-        this.costs = result;
-        this.getAllCostTotal();
-      });
+    this.costsService.monthCosts$
+      .subscribe(monthCosts => {
+        if (!!monthCosts[this.year]) {
+          let total = monthCosts[this.year][this.month + 1].total;
+          this.costs = monthCosts[this.year][this.month + 1].costs;
 
-    // this.costsService.addCostsToAllMonthCosts(2021,1);
-  }
-
-  getAllCostTotal() {
-
-    this.costCategoriesKeys.forEach(name => {
-      let sum = 0;
-      this.costs.forEach(cost => {
-          sum += <number>cost[name as keyof Cost];
+          this.pieChartData = [
+            total[this.costCategoriesKeys[0]],
+            total[this.costCategoriesKeys[1]],
+            total[this.costCategoriesKeys[2]],
+            total[this.costCategoriesKeys[3]],
+            total[this.costCategoriesKeys[4]],
+            total[this.costCategoriesKeys[5]],
+            total[this.costCategoriesKeys[6]],
+          ]
+          this.categoriesTotal = <number[]>this.pieChartData;
+          this.monthTotal = <number>this.pieChartData.reduce(function (sum, current) {
+            return <number>sum + <number>current;
+          });
         }
-      )
-      this.costsMap.set(name, sum);
-    });
-
-    this.costsMap.set('total', 0);
-    let totalSum = 0;
-    this.costsMap.forEach((value) => {
-      totalSum += value;
-    })
-    this.costsMap.set('total', totalSum);
-
-    this.pieChartData = [
-      this.costsMap.get(this.costCategoriesKeys[0]),
-      this.costsMap.get(this.costCategoriesKeys[1]),
-      this.costsMap.get(this.costCategoriesKeys[2]),
-      this.costsMap.get(this.costCategoriesKeys[3]),
-      this.costsMap.get(this.costCategoriesKeys[4]),
-      this.costsMap.get(this.costCategoriesKeys[5]),
-      this.costsMap.get(this.costCategoriesKeys[6]),
-    ]
-
+      });
   }
 
   onRowClick(date: Date) {
