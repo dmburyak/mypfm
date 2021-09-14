@@ -70,6 +70,7 @@ export class StatisticPageComponent implements OnInit {
           this.monthTotal = <number>this.pieChartData.reduce(function (sum, current) {
             return <number>sum + <number>current;
           });
+          this.showChart = !!this.monthTotal;
         }
       });
   }
