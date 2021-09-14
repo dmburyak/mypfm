@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -7,7 +7,7 @@ import { Label } from 'ng2-charts';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent {
 
   @Input() barChartData: ChartDataSets[] = [];
   @Input() barChartLabels: Label[] = [];
@@ -21,12 +21,5 @@ export class BarChartComponent implements OnInit {
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-
-  constructor() {
-  }
-
-  ngOnInit() {
-
-  }
 
 }
