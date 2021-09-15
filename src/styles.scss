@@ -1,7 +1,7 @@
 @import "app/shared/header/header-calendar";
 @import "app/home-page/statistic-page/edit-cost/edit-dialog/edit-dialog-calendar";
 @import "app/shared/snack-bar/snack-bar.component";
-
+@import "app/home-page/compare-page/compare-periods-dialog/compare-periods-dialog";
 
 html, body {
   height: 100%;
@@ -16,3 +16,4 @@ html, body { height: 100%; }
 body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+

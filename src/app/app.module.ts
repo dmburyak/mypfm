@@ -18,8 +18,6 @@ import { BarChartComponent } from './home-page/compare-page/bar-chart/bar-chart.
 import { PieChartComponent } from './home-page/statistic-page/pie-chart/pie-chart.component';
 import { TableComponent } from './home-page/statistic-page/table/table.component';
 import { EditDialogComponent } from './home-page/statistic-page/edit-cost/edit-dialog/edit-dialog.component';
-import { SelectPeriodDialogComponent } from './home-page/dialogs/select-period-dialog/select-period-dialog.component';
-import { ComparePeriodsDialogComponent } from './home-page/dialogs/compare-periods-dialog/compare-periods-dialog.component';
 import { StatisticHeaderComponent } from './home-page/statistic-page/statistic-header/statistic-header.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditCostComponent } from './home-page/statistic-page/edit-cost/edit-cost.component';
@@ -32,6 +30,7 @@ import { ConfirmDialogComponent } from './home-page/statistic-page/edit-cost/edi
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChartsModule } from 'ng2-charts';
 import { CompareHeaderComponent } from './home-page/compare-page/compare-header/compare-header.component';
+import { ComparePeriodsDialogComponent } from './home-page/compare-page/compare-periods-dialog/compare-periods-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { CompareHeaderComponent } from './home-page/compare-page/compare-header/
     PieChartComponent,
     TableComponent,
     EditDialogComponent,
-    SelectPeriodDialogComponent,
     ComparePeriodsDialogComponent,
     StatisticHeaderComponent,
     EditCostComponent,

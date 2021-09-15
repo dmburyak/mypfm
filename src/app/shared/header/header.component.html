@@ -5,6 +5,7 @@
     </button>
     <span>Персональный финансовый менеджер</span>
     <span class="spacer"></span>
+
     <input class="date-input" [matDatepicker]="picker">
     <button mat-raised-button class="menu-button" (click)="openDatePicker(picker)">
       <mat-datepicker #picker
@@ -16,7 +17,9 @@
       <mat-icon>date_range</mat-icon>
       Выбрать месяц
     </button>
-    <button mat-raised-button class="menu-button">
+
+    <button mat-raised-button class="menu-button"
+            (click)="openDialog()">
       <mat-icon> insert_chart</mat-icon>
       Сравнить месяцы
     </button>

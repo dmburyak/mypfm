@@ -1,0 +1,20 @@
+.pickers {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.action-block {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.date-input {
+  visibility: hidden;
+  width: 0;
+}
+
+.label-text {
+  display: flex;
+  align-items: center;
+}
