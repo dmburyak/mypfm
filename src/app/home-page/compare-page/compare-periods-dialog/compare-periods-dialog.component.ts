@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export interface DialogData {
   animal: string;
@@ -13,14 +13,19 @@ export interface DialogData {
 })
 
 
-export class ComparePeriodsDialogComponent {
+export class ComparePeriodsDialogComponent implements OnInit {
 
   label1 = 'Выберите первый месяц';
-  label2 = 'Выберите второй месяц dsfd fdf';
+  label2 = 'Выберите второй месяц';
+
+  compareDates = [
+    {year: 2021, month: 1},
+    {year: 2021, month: 2}
+  ]
 
   constructor(
-    public dialogRef: MatDialogRef<ComparePeriodsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    public dialogRef: MatDialogRef<ComparePeriodsDialogComponent>
+  ) {
   }
 
   openDatePicker(picker: any) {
@@ -32,11 +37,18 @@ export class ComparePeriodsDialogComponent {
   }
 
   onSaveClick() {
-
+    this.compareDates = [
+      {year: 2021, month: 8},
+      {year: 2021, month: 9}
+    ]
+    this.dialogRef.close(this.compareDates);
   }
 
   closeDatePicker($event: any, picker: any) {
     picker.close();
+  }
+
+  ngOnInit(): void {
   }
 
 }

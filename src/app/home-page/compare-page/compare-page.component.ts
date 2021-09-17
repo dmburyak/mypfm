@@ -14,8 +14,8 @@ export class ComparePageComponent implements OnInit {
 
   year1 = 2021;
   year2 = 2021;
-  month1 = 8;
-  month2 = 9;
+  month1 = 2;
+  month2 = 3;
   monthName1 = 'январь';
   monthName2 = 'февраль';
   periodName1 = '';
@@ -30,6 +30,7 @@ export class ComparePageComponent implements OnInit {
 
   barChartData: ChartDataSets[] = [];
   barChartLabels: Label[] = [];
+  showChart = true;
 
   constructor(
     private costsService: CostsService,
@@ -39,8 +40,8 @@ export class ComparePageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.monthName1 = this.dictionaries.monthsDic[this.month1];
-    this.monthName2 = this.dictionaries.monthsDic[this.month2];
+    this.monthName1 = this.dictionaries.monthsDic[this.month1 - 1];
+    this.monthName2 = this.dictionaries.monthsDic[this.month2 - 1];
 
     this.periodName1 = `${this.monthName1} ${this.year1}`;
     this.periodName2 = `${this.monthName2} ${this.year2}`;
@@ -60,6 +61,7 @@ export class ComparePageComponent implements OnInit {
           {data: this.monthCosts2, label: this.periodName2}
         ];
 
+        this.showChart = this.existDataForChart();
 
       })
 
@@ -79,6 +81,17 @@ export class ComparePageComponent implements OnInit {
 
 
   }
+
+  existDataForChart() {
+   let firstPeriodCosts = <number[]>this.barChartData[0].data;
+   let secondPeriodCosts = <number[]>this.barChartData[1].data;
+   if (firstPeriodCosts.reduce((sum, value) => sum + value,0) > 0
+   && firstPeriodCosts.reduce((sum, value) => sum + value,0) > 0) {
+     return true;
+   }
+   return false;
+  }
+
 
 
 }

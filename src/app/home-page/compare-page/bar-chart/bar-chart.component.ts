@@ -11,6 +11,7 @@ export class BarChartComponent {
 
   @Input() barChartData: ChartDataSets[] = [];
   @Input() barChartLabels: Label[] = [];
+  @Input() showChart = false;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -18,6 +19,7 @@ export class BarChartComponent {
       position: 'top'
     }
   };
+
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];

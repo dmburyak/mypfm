@@ -1,4 +1,4 @@
-<div class="bar-chart">
+<div class="bar-chart" *ngIf="showChart; else noData">
   <canvas baseChart
     [datasets]="barChartData"
     [labels]="barChartLabels"
@@ -8,3 +8,8 @@
     [chartType]="barChartType">
   </canvas>
 </div>
+
+<ng-template #noData>
+  <h2>В этих периодах не было затрат</h2>
+</ng-template>
+

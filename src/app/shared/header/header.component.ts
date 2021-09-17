@@ -33,14 +33,14 @@ export class HeaderComponent implements OnInit {
     picker.close();
   }
 
-  openDialog(): void {
+  openComparePeriodsDialog(): void {
     const dialogRef = this.dialog.open(ComparePeriodsDialogComponent, {
-      data: {name: 'aaa', animal: 'bbb'},
       panelClass: 'compare-modalbox'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed()
+      .subscribe(result => {
+      console.log(result);
     });
   }
 
