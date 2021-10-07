@@ -1,11 +1,11 @@
 <div class="pickers">
-  <div class="label-text">{{ label1 }}</div>
+  <div class="label-text">{{ labels[0] }}</div>
   <div>
     <input class="date-input" [matDatepicker]="picker1">
     <button mat-raised-button class="menu-button" (click)="openDatePicker(picker1)">
       <mat-datepicker #picker1
                       startView="year"
-                      (monthSelected)="closeDatePicker($event, picker1)"
+                      (monthSelected)="closeDatePicker($event, picker1, 0)"
                       panelClass="header-calendar"
       ></mat-datepicker>
       <mat-icon>date_range</mat-icon>
@@ -14,13 +14,13 @@
 </div>
 
 <div class="pickers">
-  <div class="label-text">{{ label2 }}</div>
+  <div class="label-text">{{ labels[1] }}</div>
   <div>
     <input class="date-input" [matDatepicker]="picker2">
     <button mat-raised-button class="menu-button" (click)="openDatePicker(picker2)">
       <mat-datepicker #picker2
                       startView="year"
-                      (monthSelected)="closeDatePicker($event, picker2)"
+                      (monthSelected)="closeDatePicker($event, picker2, 1)"
                       panelClass="header-calendar"
       ></mat-datepicker>
       <mat-icon>date_range</mat-icon>

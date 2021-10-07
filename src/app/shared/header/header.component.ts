@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatesService } from '../../services/dates.service';
 import { ComparePeriodsDialogComponent } from '../../home-page/compare-page/compare-periods-dialog/compare-periods-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CostsService } from '../../services/costs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +16,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private datesService: DatesService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private router: Router
+    ) {
   }
 
   ngOnInit(): void {
@@ -30,6 +34,7 @@ export class HeaderComponent implements OnInit {
 
   closeDatePicker(selectedDate: any, picker: any) {
     this.datesService.onNewDateSelected(selectedDate);
+    this.router.navigate(['']);
     picker.close();
   }
 
@@ -39,9 +44,10 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed()
-      .subscribe(result => {
-      console.log(result);
-    });
+      .subscribe(compareDates => {
+
+        // console.log(compareDates);
+      });
   }
 
 

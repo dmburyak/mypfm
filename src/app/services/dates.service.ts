@@ -10,6 +10,19 @@ export class DatesService {
   dateSource = new BehaviorSubject<Date>(new Date());
   selectedDate$ = this.dateSource.asObservable();
 
+  defaultDatesToCompare = [
+      {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth()
+      },
+      {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1
+      },
+  ]
+  datesToCompareSource = new BehaviorSubject(this.defaultDatesToCompare);
+  datesToCompare$ = this.datesToCompareSource.asObservable();
+
   constructor() {
   }
 
@@ -18,4 +31,9 @@ export class DatesService {
       this.dateSource.next(date);
     }
   }
+
+onNewDatesToCompareSelected(datesToCompare: { year: number; month: number; }[]) {
+    this.datesToCompareSource.next(datesToCompare)
+}
+
 }

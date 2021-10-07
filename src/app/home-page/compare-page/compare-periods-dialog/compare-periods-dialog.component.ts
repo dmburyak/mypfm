@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CostsService } from '../../../services/costs.service';
+import { DatesService } from '../../../services/dates.service';
+import { DictionariesService } from '../../../services/dictionaries.service';
+import { Router } from '@angular/router';
 
 export interface DialogData {
   animal: string;
@@ -15,16 +19,23 @@ export interface DialogData {
 
 export class ComparePeriodsDialogComponent implements OnInit {
 
-  label1 = 'Выберите первый месяц';
-  label2 = 'Выберите второй месяц';
+  labels = [
+    'Выберите первый месяц',
+    'Выберите второй месяц'
+  ];
 
-  compareDates = [
-    {year: 2021, month: 1},
-    {year: 2021, month: 2}
+  datesToCompare = [
+    {year: 2021, month: 0},
+    {year: 2021, month: 0}
   ]
+  private monthNames: string[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<ComparePeriodsDialogComponent>
+    public dialogRef: MatDialogRef<ComparePeriodsDialogComponent>,
+    private costsService: CostsService,
+    private datesService: DatesService,
+    private dictionaries: DictionariesService,
+    private router: Router
   ) {
   }
 
@@ -32,23 +43,29 @@ export class ComparePeriodsDialogComponent implements OnInit {
     picker.open();
   }
 
+  closeDatePicker(date: any, picker: any, period: number) {
+    picker.close();
+    this.datesToCompare[period].year = date.getFullYear();
+    this.datesToCompare[period].month = date.getMonth() + 1;
+
+    this.labels[period] = `${this.monthNames[date.getMonth()]} ${this.datesToCompare[period].year} г.`;
+
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onSaveClick() {
-    this.compareDates = [
-      {year: 2021, month: 8},
-      {year: 2021, month: 9}
-    ]
-    this.dialogRef.close(this.compareDates);
-  }
-
-  closeDatePicker($event: any, picker: any) {
-    picker.close();
+    this.dialogRef.close(this.datesToCompare);
+    if(this.datesToCompare[0].month > 0 && this.datesToCompare[1].month > 0) {
+    this.datesService.onNewDatesToCompareSelected(this.datesToCompare);
+    this.router.navigate(['compare']);
+    }
   }
 
   ngOnInit(): void {
+    this.monthNames = this.dictionaries.monthsDic;
   }
 
 }

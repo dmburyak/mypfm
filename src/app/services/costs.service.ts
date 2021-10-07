@@ -31,9 +31,8 @@ export class CostsService {
   getMonthCosts(year: number, month: number): void {
     this.http.get(`${environment.apiURL}/costs/${year}/${month}`)
       .subscribe(costs => {
-        this.monthCostsSource.next(
-          this.addCostsToAllMonthCosts(year, month, costs as Cost[])
-        )
+        let x = this.addCostsToAllMonthCosts(year, month, costs as Cost[]);
+        this.monthCostsSource.next(x);
       })
   }
 

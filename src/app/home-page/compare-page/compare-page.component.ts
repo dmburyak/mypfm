@@ -16,8 +16,8 @@ export class ComparePageComponent implements OnInit {
   year2 = 2021;
   month1 = 2;
   month2 = 3;
-  monthName1 = 'январь';
-  monthName2 = 'февраль';
+  monthName1 = '';
+  monthName2 = '';
   periodName1 = '';
   periodName2 = '';
 
@@ -40,11 +40,17 @@ export class ComparePageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.monthName1 = this.dictionaries.monthsDic[this.month1 - 1];
-    this.monthName2 = this.dictionaries.monthsDic[this.month2 - 1];
+    this.datesService.datesToCompare$
+      .subscribe(newDatesToCompare => {
+        this.year1 = newDatesToCompare[0].year;
+        this.year2 = newDatesToCompare[1].year;
+        this.month1 = newDatesToCompare[0].month;
+        this.month2 = newDatesToCompare[1].month;
 
-    this.periodName1 = `${this.monthName1} ${this.year1}`;
-    this.periodName2 = `${this.monthName2} ${this.year2}`;
+        this.setPeriodsNames();
+        this.costsService.getMonthCosts(this.year1,  this.month1);
+        this.costsService.getMonthCosts(this.year2,  this.month2);
+      })
 
     this.costsService.monthCosts$
       .subscribe(monthCosts => {
@@ -76,22 +82,25 @@ export class ComparePageComponent implements OnInit {
       categoriesNames[6],
     ];
 
-    this.costsService.getMonthCosts(this.year1, this.month1);
-    this.costsService.getMonthCosts(this.year2, this.month2);
-
-
   }
 
   existDataForChart() {
-   let firstPeriodCosts = <number[]>this.barChartData[0].data;
-   let secondPeriodCosts = <number[]>this.barChartData[1].data;
-   if (firstPeriodCosts.reduce((sum, value) => sum + value,0) > 0
-   && firstPeriodCosts.reduce((sum, value) => sum + value,0) > 0) {
-     return true;
-   }
-   return false;
+    let firstPeriodCosts = <number[]>this.barChartData[0].data;
+    let secondPeriodCosts = <number[]>this.barChartData[1].data;
+    if (firstPeriodCosts.reduce((sum, value) => sum + value, 0) > 0
+      && secondPeriodCosts.reduce((sum, value) => sum + value, 0) > 0) {
+      return true;
+    }
+    return false;
   }
 
+  setPeriodsNames() {
+    this.monthName1 = this.dictionaries.monthsDic[this.month1 - 1];
+    this.monthName2 = this.dictionaries.monthsDic[this.month2 - 1];
+
+    this.periodName1 = `${this.monthName1} ${this.year1}`;
+    this.periodName2 = `${this.monthName2} ${this.year2}`;
+  }
 
 
 }
